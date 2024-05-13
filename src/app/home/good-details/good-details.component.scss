@@ -1,0 +1,56 @@
+.details {
+  display: flex;
+  justify-content: space-between;
+
+  &_images {
+    display: grid;
+    grid-template-columns: repeat(3, 0.6fr);
+    grid-gap: 5px;
+  }
+
+  &_image {
+    border-radius: 10px;
+  }
+
+  &_info {
+    flex-basis: 40%;
+
+    &--top {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    &--bottom {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &_title {
+    font-size: 28px;
+  }
+
+  &_description {
+    font-style: italic;
+    color: gray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &_price {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &_rating {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  &_brand {}
+
+  &_category {}
+}

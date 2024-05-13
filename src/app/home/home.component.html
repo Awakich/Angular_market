@@ -1,0 +1,11 @@
+<section class="home">
+  @defer {
+  <section class="list">
+    @for (good of goodsList(); track good.id) {
+    <app-good (inFavoriteChange)="toggleFavorite($event, good)" [good]="good" />
+    }
+  </section>
+  } @loading {
+  <p class="loading">Loading...</p>
+  }
+</section>

@@ -1,0 +1,30 @@
+<div class="details">
+  <div class="details_images">
+    @for(image of goodInfo()?.images; track $index){
+    <img
+      class="details_image"
+      alt="brand image"
+      [ngSrc]="image"
+      width="400"
+      height="200"
+    />
+    }
+  </div>
+
+  <div class="details_info">
+    <div class="details_info--top">
+      <h2 class="details_title">{{ goodInfo()?.title }}</h2>
+      <p class="details_price">${{ goodInfo()?.price }}</p>
+    </div>
+
+    <p class="details_description">{{ goodInfo()?.description }}</p>
+    <p class="details_rating">Rating: {{ goodInfo()?.rating }}</p>
+
+    <div class="details_info--bottom">
+      <p class="details_brand">Brand: {{ goodInfo()?.brand }}</p>
+      <p class="details_category">Category: {{ goodInfo()?.category }}</p>
+    </div>
+
+    <button class="btn" (click)="addToCart()">Add to Cart</button>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<section class="favorite">
+  @if(favoriteList().length){
+  <div class="favorite_top">
+    <p class="total">Total favorite is: {{ favoriteList().length }}</p>
+    <a class="total" (click)="clearFavorite()">Clear favorite</a>
+  </div>
+  } @else{}
+
+  <section class="list">
+    @defer{ @for (good of favoriteList(); track good.id) {
+    <app-good [good]="good" (inFavoriteChange)="toggleFavorite($event, good)" />
+    } @empty {
+    <p class="empty">No items!</p>
+    } } @loading {
+    <p class="loading">Loading...</p>
+    }
+  </section>
+</section>

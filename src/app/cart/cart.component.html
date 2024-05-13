@@ -1,0 +1,34 @@
+<section class="cart">
+  @if(cartList().length){
+  <div class="cart_top">
+    <p class="total">Total Price is: ${{ totalPrice() }}</p>
+    <a class="total" (click)="clearCart()">Clear Cart</a>
+  </div>
+  <p class="total">Amount of goods {{ totalAmount() }}</p>
+  } @else{}
+
+  <section class="list">
+    @defer{ @for (good of cartList(); track good.id) {
+
+    <div class="list_el">
+      <app-good
+        [good]="good"
+        (inFavoriteChange)="toggleFavorite($event, good)"
+      />
+
+      <div class="counter">
+        <button (click)="minusGood(good)" class="btn">-</button>
+        <p class="counter_amount">{{ good.count }}</p>
+        <button (click)="plusCart(good)" class="btn">+</button>
+      </div>
+    </div>
+
+    <a (click)="removeGood(good)">X</a>
+
+    } @empty {
+    <p class="empty">No items</p>
+    } } @loading {
+    <p class="loading">Loading...</p>
+    }
+  </section>
+</section>

@@ -1,0 +1,23 @@
+.content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 50px auto;
+}
+
+.navigation {
+  margin-bottom: 100px;
+
+  &_list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_el {
+    color: #222;
+    font-weight: 600;
+    font-size: 20px;
+  }
+}
