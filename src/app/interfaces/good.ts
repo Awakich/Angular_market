@@ -1,3 +1,7 @@
+export interface Goods {
+  products: Good[]
+}
+
 export interface Good {
   id: number
   title: string

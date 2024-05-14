@@ -16,8 +16,8 @@ export class CartComponent {
   favoriteService = inject(FavoriteService);
 
   cartList = this.cartService.cartList;
-  totalPrice = computed(() => this.cartList().reduce((sum, good) => sum + good.count * good.price, 0))
-  totalAmount = computed(() => this.cartList().reduce((sum, good) => sum + good.count, 0))
+  totalPrice = computed(() => this.cartList().reduce((sum: string, good: Good) => sum + good.count * good.price, 0))
+  totalAmount = computed(() => this.cartList().reduce((sum: string, good: Good) => sum + good.count, 0))
 
   toggleFavorite(value: boolean, good: Good) {
     this.favoriteService.toggleFavorite(value, good);

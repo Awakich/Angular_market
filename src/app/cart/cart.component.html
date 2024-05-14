@@ -5,7 +5,7 @@
     <a class="total" (click)="clearCart()">Clear Cart</a>
   </div>
   <p class="total">Amount of goods {{ totalAmount() }}</p>
-  } @else{}
+  }
 
   <section class="list">
     @defer{ @for (good of cartList(); track good.id) {

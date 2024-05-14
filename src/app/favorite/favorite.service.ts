@@ -1,11 +1,12 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, effect, signal } from '@angular/core';
 import { Good } from '../interfaces/good';
+import { localStorageSignal } from '../hooks/localStorage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteService {
-  favoriteList = signal<Good[]>(JSON.parse(localStorage.getItem('favorite') || '[]'));
+  favoriteList = localStorageSignal('favorite', JSON.parse(localStorage.getItem('favorite') || '[]'));
 
   getAllFavorites() {
     return this.favoriteList()
@@ -18,14 +19,11 @@ export class FavoriteService {
       this.favoriteList.update(goods => [...goods, good])
     }
     else {
-      this.favoriteList.update(goods => goods.filter(g => g.id !== good.id))
+      this.favoriteList.update(goods => goods.filter((g: Good) => g.id !== good.id))
     }
-
-    localStorage.setItem('favorite', JSON.stringify(this.favoriteList()))
   }
 
   clearFavorite() {
     this.favoriteList.update(_ => [])
-    localStorage.setItem('cart', JSON.stringify(this.favoriteList()))
   }
 }

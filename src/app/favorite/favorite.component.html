@@ -4,7 +4,7 @@
     <p class="total">Total favorite is: {{ favoriteList().length }}</p>
     <a class="total" (click)="clearFavorite()">Clear favorite</a>
   </div>
-  } @else{}
+  }
 
   <section class="list">
     @defer{ @for (good of favoriteList(); track good.id) {

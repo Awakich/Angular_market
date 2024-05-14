@@ -1,53 +1,48 @@
-import { Injectable, signal } from "@angular/core";
+import { Injectable, effect, signal } from "@angular/core";
 import { Good } from "../interfaces/good";
+import { localStorageSignal } from "../hooks/localStorage";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CartService {
-  cartList = signal<Good[]>(JSON.parse(localStorage.getItem('cart') || '[]'));
+
+  cartList = localStorageSignal('cart', JSON.parse(localStorage.getItem('cart') || '[]'));
 
   addToCart(good: Good) {
-    const existGood = this.cartList().find(g => g.id === good.id);
+    const existGood = this.cartList().find((g: Good) => g.id === good.id);
 
     if (existGood) {
       existGood.count += 1;
 
-      this.cartList.update(goods => goods.map(g => g.id === good.id ? existGood : g));
+      this.cartList.update((goods: Good[]) => goods.map((g: Good) => g.id === good.id ? existGood : g));
     } else {
-      this.cartList.update(goods => [...goods, { ...good, count: 1 }]);
-
+      this.cartList.update((goods: Good[]) => [...goods, { ...good, count: 1 }]);
     }
-
-    localStorage.setItem('cart', JSON.stringify(this.cartList()))
   }
 
   minusFromCart(good: Good) {
-    const existGood = this.cartList().find(g => g.id === good.id);
+    const existGood = this.cartList().find((g: Good) => g.id === good.id);
 
     if (existGood) {
       existGood.count -= 1;
 
       if (!existGood.count) {
-        this.cartList.update(goods => goods.filter(g => g.id !== good.id))
-      } else this.cartList.update(goods => goods.map((g) => g.id === good.id ? { ...g, count: existGood.count } : g))
+        this.cartList.update((goods: Good[]) => goods.filter((g: Good) => g.id !== good.id))
+      } else this.cartList.update((goods: Good[]) => goods.map((g: Good) => g.id === good.id ? { ...g, count: existGood.count } : g))
     }
-
-    localStorage.setItem('cart', JSON.stringify(this.cartList()));
   }
 
   removeGood(good: Good) {
-    const index = this.cartList().findIndex(g => g.id === good.id);
+    const index = this.cartList().findIndex((g: Good) => g.id === good.id);
 
     if (index !== -1) {
-      this.cartList.update(goods => goods.filter(g => g.id !== good.id));
+      this.cartList.update((goods: Good[]) => goods.filter((g: Good) => g.id !== good.id));
     }
-    localStorage.setItem('cart', JSON.stringify(this.cartList()))
   }
 
   clearCart() {
-    this.cartList.update(_ => [])
-    localStorage.setItem('cart', JSON.stringify(this.cartList()))
+    this.cartList.update((_: Good[]) => []);
   }
 }
