@@ -6,7 +6,7 @@ import { localStorageSignal } from '../hooks/localStorage';
   providedIn: 'root'
 })
 export class FavoriteService {
-  favoriteList = localStorageSignal('favorite', JSON.parse(localStorage.getItem('favorite') || '[]'));
+  favoriteList = localStorageSignal<Good[]>('favorite', []);
 
   getAllFavorites() {
     return this.favoriteList()

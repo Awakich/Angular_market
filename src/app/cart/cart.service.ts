@@ -1,4 +1,4 @@
-import { Injectable, effect, signal } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Good } from "../interfaces/good";
 import { localStorageSignal } from "../hooks/localStorage";
 
@@ -8,7 +8,7 @@ import { localStorageSignal } from "../hooks/localStorage";
 
 export class CartService {
 
-  cartList = localStorageSignal('cart', JSON.parse(localStorage.getItem('cart') || '[]'));
+  cartList = localStorageSignal<Good[]>('cart', []);
 
   addToCart(good: Good) {
     const existGood = this.cartList().find((g: Good) => g.id === good.id);
