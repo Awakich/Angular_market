@@ -17,4 +17,12 @@ export class GoodsService {
   getGoodById(id: number) {
     return this.http.get<Good>(this.url + '/' + id)
   }
+
+  getCategories() {
+    return this.http.get<string[]>(this.url + '/categories')
+  }
+
+  getCategoryGoods(category: string) {
+    return this.http.get<Goods>(this.url + '/category/' + category)
+  }
 }

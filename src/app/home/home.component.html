@@ -1,8 +1,21 @@
 <section class="home">
+  <input [(ngModel)]="userInput" />
+
+  <section class="category_list">
+    @defer { @for (category of categoriesList(); track $index) {
+    <button class="btn" (click)="setCategory(category)">{{ category }}</button>
+    } } @loading {
+    <p class="loading">Loading...</p>
+    }
+    <button class="btn" (click)="clearCategory()">Clear category</button>
+  </section>
+
   @defer {
   <section class="list">
-    @for (good of goodsList(); track good.id) {
+    @for (good of filteredItems(); track good.id) {
     <app-good (inFavoriteChange)="toggleFavorite($event, good)" [good]="good" />
+    } @empty {
+    <p>Goods not foound!</p>
     }
   </section>
   } @loading {
